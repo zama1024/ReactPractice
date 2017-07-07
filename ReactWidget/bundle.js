@@ -22491,7 +22491,7 @@ var Clock = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { id: 'clock' },
         this.state.date.toString()
       );
     }
