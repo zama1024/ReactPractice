@@ -9763,6 +9763,10 @@ var _clock = __webpack_require__(184);
 
 var _clock2 = _interopRequireDefault(_clock);
 
+var _autocomplete = __webpack_require__(185);
+
+var _autocomplete2 = _interopRequireDefault(_autocomplete);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9783,10 +9787,12 @@ var Root = function (_React$Component) {
   _createClass(Root, [{
     key: 'render',
     value: function render() {
+      var list = ["Saima", "Farshid", "Lameed", "Rafi"];
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_clock2.default, null)
+        _react2.default.createElement(_clock2.default, null),
+        _react2.default.createElement(_autocomplete2.default, { list: list })
       );
     }
   }]);
@@ -22501,6 +22507,85 @@ var Clock = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Clock;
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(82);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(98);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Autocomplete = function (_React$Component) {
+  _inherits(Autocomplete, _React$Component);
+
+  function Autocomplete() {
+    _classCallCheck(this, Autocomplete);
+
+    var _this = _possibleConstructorReturn(this, (Autocomplete.__proto__ || Object.getPrototypeOf(Autocomplete)).call(this));
+
+    _this.state = {
+      list: [],
+      inputVal: ""
+    };
+    return _this;
+  }
+
+  _createClass(Autocomplete, [{
+    key: 'findItem',
+    value: function findItem(e) {
+      e.preventDefault();
+      this.setState({ inputVal: e.target.value });
+      for (var i = 0; i < this.props.list.length; i++) {
+        if (this.props.list[i].startsWith(this.state.inputVal)) {
+          this.setState({ list: this.state.list.concat([this.props.list[i]]) });
+        }
+      }
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('input', { onChange: this.findItem.bind(this) }),
+        _react2.default.createElement(
+          'ul',
+          null,
+          this.state.list
+        )
+      );
+    }
+  }]);
+
+  return Autocomplete;
+}(_react2.default.Component);
+
+exports.default = Autocomplete;
 
 /***/ })
 /******/ ]);
